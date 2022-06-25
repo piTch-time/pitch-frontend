@@ -6,7 +6,6 @@ type inputType = {
   defaultValue?: string;
   name?: string;
   type?: string;
-  width?: number;
   onChange: any;
 };
 
@@ -16,7 +15,6 @@ export const Input = ({
   defaultValue,
   name,
   type,
-  width,
   onChange,
 }: inputType) => {
   return (
@@ -26,7 +24,6 @@ export const Input = ({
       defaultValue={defaultValue}
       name={name}
       type={type}
-      width={width}
       onChange={onChange}
     ></InputComponent>
   );
@@ -35,8 +32,12 @@ export const Input = ({
 const defaultStyle: CSSProperties = {};
 
 const InputComponent = styled.input<inputType>`
-  width: ${({ width }) => width}px;
+  width: 100%;
+  height: 2rem;
+  margin: 0.4rem 0;
+  padding: 0.4rem;
+  font-size: 1.1rem;
+  border: none;
+  border-bottom: 1px solid #585eff;
   display: flex;
-  flex-direction: column;
-  height: 100%;
 `;

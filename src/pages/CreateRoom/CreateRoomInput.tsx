@@ -1,5 +1,8 @@
+import { Button } from "@sharedComponents/Button";
 import { Input } from "@sharedComponents/Input";
+import { Spacing } from "@sharedComponents/Spacing";
 import React, { useState } from "react";
+import styled from "styled-components";
 
 interface RoomInputs {
   name: string; // 팀명(방 이름)
@@ -33,22 +36,22 @@ export const CreateRoomInput = () => {
     e.preventDefault();
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>팀명</div>
+    <Form onSubmit={handleSubmit}>
+      <Title>팀명</Title>
       <Input
         name="name"
         onChange={handleInputChange}
         value={inputs.name}
         placeholder="ex) 일팔일팔"
       ></Input>
-      <div>공동 목표</div>
+      <Title>공동 목표</Title>
       <Input
         name="goal"
         onChange={handleInputChange}
         value={inputs.goal}
         placeholder="ex) 와이어프레임 완성하기"
       ></Input>
-      <div>시간 설정</div>
+      <Title>시간 설정</Title>
       <Input
         name="startAt"
         type="datetime-local"
@@ -61,7 +64,7 @@ export const CreateRoomInput = () => {
         defaultValue={new Date().toISOString().slice(0, 16)}
         onChange={handleInputChange}
       ></Input>
-      <div>유튜브 URL</div>
+      <Title>유튜브 URL</Title>
       <Input
         name="musicUrl"
         type="url"
@@ -69,7 +72,7 @@ export const CreateRoomInput = () => {
         value={inputs.musicUrl}
         placeholder="ex) https://www.youtube.com/watch?v=L0kqoqV_Nfw"
       ></Input>
-      <div>비밀번호 입력</div>
+      <Title>비밀번호 입력</Title>
       <Input
         name="password"
         type="password"
@@ -77,7 +80,18 @@ export const CreateRoomInput = () => {
         value={inputs.password}
         placeholder="비밀번호를 입력해주세요."
       ></Input>
-      <button type="submit">방 만들기</button>
-    </form>
+      <Spacing height={4}></Spacing>
+      <Button type="submit">방 만들기</Button>
+      <Spacing height={1}></Spacing>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  margin: 2rem;
+`;
+
+const Title = styled.form`
+  font-size: 1.4rem;
+  margin-top: 5.2rem;
+`;
