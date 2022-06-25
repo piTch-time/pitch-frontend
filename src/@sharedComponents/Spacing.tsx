@@ -1,4 +1,4 @@
-import styled, { css, CSSProperties } from 'styled-components';
+import styled, { css, CSSProperties } from "styled-components";
 
 interface SpacingProps {
   width?: number;
