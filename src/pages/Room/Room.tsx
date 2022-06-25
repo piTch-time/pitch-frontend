@@ -5,6 +5,9 @@ import { TeamName } from './components/TeamName';
 import { Timer } from './components/Timer';
 import { Todo } from './components/Todo';
 import { YoutubeContainer } from './components/YoutubeContainer';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const Room = () => {
   return (
@@ -12,13 +15,27 @@ export const Room = () => {
       <Spacing height={5.6} />
       <TeamName name={'팀 이름'} />
       <Spacing height={0.8} />
+
       <TeamMission content={'팀 목표'} />
+      <Spacing height={2.4} />
+      <Slider {...settings}>
+        <Timer />
+        <YoutubeContainer />
+      </Slider>
       <Spacing height={5.3} />
-      <Timer></Timer>
-      <YoutubeContainer />
+
       <Todo></Todo>
     </Container>
   );
+};
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  centerMode: true,
 };
 
 const Container = styled.div`

@@ -48,6 +48,7 @@ export const Timer = () => {
 };
 
 const Container = styled.div`
+  width: 100%;
   height: 11.4rem;
   display: flex;
   justify-content: center;
