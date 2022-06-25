@@ -10,7 +10,7 @@ export const Room = () => {
       <TeamName name={'팀 이름'} />
       <TeamMission content={'팀 목표'} />
       <Timer></Timer>
-      <YoutubeContainer></YoutubeContainer>
+      <YoutubeContainer />
     </Container>
   );
 };
