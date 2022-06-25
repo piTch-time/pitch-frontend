@@ -1,5 +1,6 @@
 import { Button } from "@sharedComponents/Button";
 import { TopCont } from "@sharedComponents/TopCont";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RoomList } from "./RoomList";
 
@@ -34,7 +35,9 @@ export const Main = () => {
           <RoomList list={list} />
         </div>
       </Scroll>
-      <Button>팀 만들기</Button>
+      <Link to="/room/create">
+        <Button>팀 만들기</Button>
+      </Link>
     </Container>
   );
 };
