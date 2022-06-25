@@ -15,5 +15,4 @@ const Container = styled.div`
   font-size: 2rem;
   line-height: 150%;
   color: #161853;
-  background-color: #f5f5f5;
 `;
