@@ -10,7 +10,14 @@ export const Todo = () => {
 
   const createUser = () => {
     if (userInputRef && userInputRef.current) {
-      setUsers([...users, { name: userInputRef.current.value, taskList: [] }]);
+      setUsers([
+        ...users,
+        {
+          name: userInputRef.current.value,
+          taskList: [],
+          isInputActive: false,
+        },
+      ]);
       userInputRef.current.value = '';
     }
     console.log(users);
@@ -40,11 +47,26 @@ export const Todo = () => {
                 isDone: false,
               },
             ],
+            isInputActive: false,
           };
       });
       console.log(newUsers);
       setUsers(newUsers);
     }
+  };
+
+  const activateInput = (name: string) => {
+    const newUsers = users.map((user: User) => {
+      if (user.name !== name) {
+        return user;
+      } else
+        return {
+          name: user.name,
+          taskList: user.taskList,
+          isInputActive: true,
+        };
+    });
+    setUsers(newUsers);
   };
 
   return (
@@ -61,13 +83,28 @@ export const Todo = () => {
         return (
           <div key={user.name}>
             <div>{user.name} </div>
-            {user?.taskList?.map((task: task) => (
-              <div>{task.description}</div>
-            ))}
-            <input ref={taskInputRef}></input>
+            <div>
+              {user?.taskList?.map((task: task) => (
+                <div>
+                  <input type='checkbox'></input>
+                  {task.description}
+                </div>
+              ))}
+              {user.isInputActive && (
+                <input
+                  ref={taskInputRef}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      createTask(user.name);
+                    }
+                  }}
+                ></input>
+              )}
+            </div>
+
             <button
               onClick={() => {
-                createTask(user.name);
+                activateInput(user.name);
               }}
             >
               태스크 생성
@@ -85,6 +122,7 @@ const UserInput = styled.input``;
 interface User {
   name: string;
   taskList: task[];
+  isInputActive: boolean;
 }
 
 interface task {
