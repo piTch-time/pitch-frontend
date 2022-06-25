@@ -2,13 +2,21 @@ import { Spacing } from '@sharedComponents/Spacing';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
-export const Todo = () => {
+interface TodoProps {
+  setTot: any;
+  setDone: any;
+}
+
+export const Todo = ({ setTot, setDone }: TodoProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const userInputRef = useRef<HTMLInputElement>(null);
   const taskInputRef = useRef<HTMLInputElement>(null);
   const checkBoxRef = useRef<HTMLInputElement>(null);
+
+  const [totalTask, setTotalTask] = useState<number>(0);
+  const [doneTask, setDoneTask] = useState<number>(0);
 
   const createUser = () => {
     if (userInputRef && userInputRef.current) {
@@ -106,11 +114,30 @@ export const Todo = () => {
     setUsers(newUsers);
   };
 
+  const taskCount = () => {
+    let done = 0;
+    let total = 0;
+    users.map((user: User) => {
+      user.taskList.forEach((task: task) => {
+        total++;
+        if (task.isDone) done++;
+      });
+    });
+    setDoneTask(done);
+    setTotalTask(total);
+    setDone(done);
+    setTot(total);
+  };
+  useEffect(() => {
+    taskCount();
+  }, [createTask, toggleDone]);
+
   return (
     <Container>
       {users.map((user: User, index: number) => {
         return (
           <>
+            <Spacing height={2} style={BackgroundColor}></Spacing>
             <UserContainer key={user.name}>
               <UserName>{user.name} </UserName>
               <Spacing height={0.7}></Spacing>
@@ -158,9 +185,10 @@ export const Todo = () => {
               >
                 목표 추가
               </AddGoalButton>
-              <Spacing height={2.3}></Spacing>
+              <Spacing height={1}></Spacing>
+              <Spacing height={3} style={BackgroundColor}></Spacing>
             </UserContainer>
-            <Spacing height={2.1}></Spacing>
+            <Spacing height={2.1} style={BackgroundColor}></Spacing>
           </>
         );
       })}
@@ -186,11 +214,22 @@ export const Todo = () => {
     </Container>
   );
 };
+
+const ButtonImg = styled.img`
+  width: 1rem;
+  height: 1rem;
+`;
+
+const BackgroundColor: CSSProperties = {
+  backgroundColor: '#f8f8f8',
+};
 const CheckBox = styled.input`
   margin-left: 2.7rem;
   margin-right: 1.1rem;
   width: 1.6rem;
   height: 1.6rem;
+  accent-color: #ff5d53;
+  border: 0.3rem;
 `;
 
 const CheckBoxText = styled.span`
@@ -235,7 +274,6 @@ const NewToDoInput = styled.input`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -286,9 +324,9 @@ const UserInputButton = styled.button`
   height: 4.4rem;
   margin-left: 0.8rem;
 
-  background: #9ba9f0;
+  background: #fcfcfc;
   border-radius: 1rem;
-  border: none;
+  border: 1px solid #ff8ba3;
 `;
 
 const UserInputButtonText = styled.p`
@@ -298,7 +336,7 @@ const UserInputButtonText = styled.p`
   line-height: 100%;
   /* identical to box height, or 10px */
 
-  color: #ffffff;
+  color: #ff5d53;
 `;
 
 const UserContainer = styled.div`
@@ -308,16 +346,17 @@ const UserContainer = styled.div`
 `;
 
 const UserName = styled.div`
-  margin-left: 2.7rem;
+  margin-left: 7.5vw;
   position: relative;
   top: -1.3rem;
   width: 4.6rem;
   height: 2.6rem;
-  background: #b6bee6;
+  background: #ff8ba3;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 `;
 
 const AddGoalButton = styled.button`
@@ -330,7 +369,7 @@ const AddGoalButton = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 2.7rem;
+  margin-left: 7.5vw;
 
   width: 7.6rem;
   height: 2.4rem;

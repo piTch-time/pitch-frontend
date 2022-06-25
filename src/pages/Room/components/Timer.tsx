@@ -4,12 +4,16 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import clock from '@assets/images/clock.png';
 
-export const Timer = () => {
+interface TimerProps {
+  setTimeOver: any;
+}
+
+export const Timer = ({ setTimeOver }: TimerProps) => {
   // 예상되는 time input
   // "2020-10-10T14:58:04+09:00"
 
   const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(1);
+  const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(10);
 
   useEffect(() => {
@@ -19,8 +23,10 @@ export const Timer = () => {
       }
       if (seconds === 0) {
         if (minutes === 0) {
-          if (hours === 0) clearInterval(playTimer);
-          else {
+          if (hours === 0) {
+            clearInterval(playTimer);
+            setTimeOver(true);
+          } else {
             setHours(hours - 1);
             setMinutes(59);
           }
