@@ -38,6 +38,6 @@ const InputComponent = styled.input<inputType>`
   padding: 0.4rem;
   font-size: 1.1rem;
   border: none;
-  border-bottom: 1px solid #585eff;
+  border-bottom: 1px solid #ff6a53;
   display: flex;
 `;

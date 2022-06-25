@@ -59,18 +59,24 @@ export const CreateRoomInput = () => {
         placeholder="ex) 와이어프레임 완성하기"
       ></Input>
       <Title>시간 설정</Title>
-      <Input
-        name="startAt"
-        type="datetime-local"
-        defaultValue={curDate}
-        onChange={handleInputChange}
-      ></Input>
-      <Input
-        name="endAt"
-        type="datetime-local"
-        defaultValue={curDate}
-        onChange={handleInputChange}
-      ></Input>
+      <Flex>
+        <div>시작 시간</div>
+        <Input
+          name="startAt"
+          type="datetime-local"
+          defaultValue={curDate}
+          onChange={handleInputChange}
+        ></Input>
+      </Flex>
+      <Flex>
+        <div>종료 시간</div>
+        <Input
+          name="endAt"
+          type="datetime-local"
+          defaultValue={curDate}
+          onChange={handleInputChange}
+        ></Input>
+      </Flex>
       <Title>유튜브 URL</Title>
       <Input
         name="musicUrl"
@@ -101,4 +107,16 @@ const Form = styled.form`
 const Title = styled.form`
   font-size: 1.4rem;
   margin-top: 5.2rem;
+  font-weight: 600;
+`;
+
+const Flex = styled.form`
+  display: flex;
+  div {
+    min-width: max-content;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin: 0 1.6rem;
+  }
 `;
