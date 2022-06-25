@@ -22,6 +22,12 @@ export const CreateRoomInput = () => {
     startAt: new Date().toISOString(),
     endAt: new Date().toISOString(),
   };
+
+  const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+  const curDate = new Date(Date.now() - timezoneOffset)
+    .toISOString()
+    .slice(0, 16);
+
   const [inputs, setInputs] = useState<RoomInputs>(initialValues);
 
   const handleInputChange = (e: React.ChangeEvent<any>) => {
@@ -35,6 +41,7 @@ export const CreateRoomInput = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
   };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Title>팀명</Title>
@@ -55,13 +62,13 @@ export const CreateRoomInput = () => {
       <Input
         name="startAt"
         type="datetime-local"
-        defaultValue={new Date().toISOString().slice(0, 16)}
+        defaultValue={curDate}
         onChange={handleInputChange}
       ></Input>
       <Input
         name="endAt"
         type="datetime-local"
-        defaultValue={new Date().toISOString().slice(0, 16)}
+        defaultValue={curDate}
         onChange={handleInputChange}
       ></Input>
       <Title>유튜브 URL</Title>
