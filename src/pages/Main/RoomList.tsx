@@ -8,10 +8,7 @@ export const RoomList = ({ list }: { list: any[] }) => {
         <Container key={room.id}>
           <FlexBet>
             <Name>{room.name}</Name>
-            <Flex>
-              <Tag>🕖{room.startEnd}</Tag>
-              <Tag>{room.memberCount}명 참여 중</Tag>
-            </Flex>
+            <Tag>🕖 {room.startEnd}</Tag>
           </FlexBet>
           <div>{room.goal}</div>
           <Progress>진행상황 ({room.taskProgress}%)</Progress>
@@ -41,10 +38,6 @@ const FlexBet = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.2rem;
-`;
-
-const Flex = styled.div`
-  display: flex;
 `;
 
 const Tag = styled.div`

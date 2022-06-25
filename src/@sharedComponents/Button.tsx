@@ -18,12 +18,17 @@ const BottomButton = styled.button`
   display: flex;
   width: 100%;
   height: 7.6rem;
+  min-height: 6rem;
+  cursor: pointer;
   border: none;
-  margin: 2rem 0;
   background: #9ba9f0;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
   font-weight: bold;
+
+  &:hover {
+    background-color: skyblue;
+  }
 `;
