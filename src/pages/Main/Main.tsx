@@ -3,26 +3,21 @@ import { TopCont } from "@sharedComponents/TopCont";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RoomList } from "./RoomList";
+import React, { useEffect, useState } from "react";
+import { getRooms } from "../../services/user-service";
 
 export const Main = () => {
-  const list = [
-    {
-      id: "sdfsdf",
-      name: "팀명",
-      startEnd: "15-18",
-      memberCount: 4,
-      goal: "목표는 일찍 끝내는 것이다 자고싶다 졸리다",
-      taskProgress: 35,
-    },
-    {
-      id: "sdfsdf",
-      name: "팀명",
-      startEnd: "15-18",
-      memberCount: 4,
-      goal: "집에보내줘집에보내줘집에보내줘집에보내줘",
-      taskProgress: 70,
-    },
-  ];
+  const [list, setList] = useState();
+
+  const getData = async () => {
+    const lists = await getRooms();
+    console.log(lists);
+    setList(lists.rooms);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Container>
@@ -32,7 +27,7 @@ export const Main = () => {
         </TopCont>
         <div>
           <Title>🔥 지금 활발한 방</Title>
-          <RoomList list={list} />
+          {list && <RoomList list={list} />}
         </div>
       </Scroll>
       <Link to="/room/create">

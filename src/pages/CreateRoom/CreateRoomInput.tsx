@@ -1,10 +1,11 @@
 import { Button } from "@sharedComponents/Button";
 import { Input } from "@sharedComponents/Input";
 import { Spacing } from "@sharedComponents/Spacing";
-import React, { useState } from "react";
 import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { postRooms } from "../../services/user-service";
 
-interface RoomInputs {
+export interface RoomInputs {
   name: string; // 팀명(방 이름)
   password: string; // 비밀번호
   goal: string; // 공동 목표
@@ -40,6 +41,8 @@ export const CreateRoomInput = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const lists = await postRooms(inputs);
+    setInputs(lists);
   };
 
   return (
