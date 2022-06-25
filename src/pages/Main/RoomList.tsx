@@ -27,7 +27,7 @@ const Container = styled.div`
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.05));
   background: #f9fafb;
   border-radius: 15px;
-  margin: 0.8rem 2rem;
+  margin: 1.6rem 2rem;
   padding: 1.8rem 2.4rem;
 `;
 

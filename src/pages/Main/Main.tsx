@@ -1,4 +1,5 @@
-import React from "react";
+import { Button } from "@sharedComponents/Button";
+import styled from "styled-components";
 import { RoomList } from "./RoomList";
 
 export const Main = () => {
@@ -17,16 +18,46 @@ export const Main = () => {
       startEnd: "15-18",
       memberCount: 4,
       goal: "집에보내줘집에보내줘집에보내줘집에보내줘",
-      taskProgress: 35,
+      taskProgress: 70,
     },
   ];
 
   return (
-    <>
-      <div>포브스가 선정한 세계 최강 타임어택 노동요</div>
-      <div>🔥 지금 활발한 방</div>
-      <RoomList list={list} />
-      <button>팀 만들기</button>
-    </>
+    <Container>
+      <TopCont>
+        포브스가 선정한 <br /> 세계 최강 타임어택 노동요
+      </TopCont>
+      <div>
+        <Title>🔥 지금 활발한 방</Title>
+        <RoomList list={list} />
+      </div>
+      <Button>팀 만들기</Button>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  background: #f5f5f5;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const TopCont = styled.div`
+  background: #b7bee7;
+  border-radius: 0px 0px 15px 15px;
+  height: 12rem;
+  color: white;
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: bold;
+  align-items: flex-end;
+  padding: 2rem;
+`;
+
+const Title = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 2rem 1rem;
+`;
