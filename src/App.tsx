@@ -2,8 +2,9 @@ import { GlobalStyle } from "@sharedComponents/GlobalStyle";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Home } from "@pages/Home";
 import { SamplePage } from "@pages/SamplePage";
-import { CreateRoom } from "@pages/CreateRoom/CreateRoom";
+
 import { Main } from "@pages/Main/Main";
+import { CreateRoom } from "@pages/CreateRoom/CreateRoom";
 
 function App() {
   return (
