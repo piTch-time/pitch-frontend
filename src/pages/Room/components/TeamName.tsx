@@ -5,7 +5,11 @@ interface TeamNameProps {
 }
 
 export const TeamName = ({ name }: TeamNameProps) => {
-  return <p>{name}</p>;
+  return (
+    <Container>
+      <p>{name}</p>
+    </Container>
+  );
 };
 
 const Container = styled.div`
