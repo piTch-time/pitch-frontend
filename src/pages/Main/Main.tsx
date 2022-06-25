@@ -1,4 +1,5 @@
 import { Button } from "@sharedComponents/Button";
+import { TopCont } from "@sharedComponents/TopCont";
 import styled from "styled-components";
 import { RoomList } from "./RoomList";
 
@@ -42,18 +43,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
-const TopCont = styled.div`
-  background: #b7bee7;
-  border-radius: 0px 0px 15px 15px;
-  height: 12rem;
-  color: white;
-  display: flex;
-  font-size: 1.6rem;
-  font-weight: bold;
-  align-items: flex-end;
-  padding: 2rem;
 `;
 
 const Title = styled.div`

@@ -2,11 +2,16 @@ import styled from "styled-components";
 
 type buttonType = {
   children: any;
+  type?: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;
 };
 
-export const Button = ({ children, onClick }: buttonType) => {
-  return <BottomButton onClick={onClick}>{children}</BottomButton>;
+export const Button = ({ children, type, onClick }: buttonType) => {
+  return (
+    <BottomButton type={type} onClick={onClick}>
+      {children}
+    </BottomButton>
+  );
 };
 
 const BottomButton = styled.button`
@@ -14,7 +19,7 @@ const BottomButton = styled.button`
   width: 100%;
   height: 7.6rem;
   border: none;
-  margin: 0 2rem;
+  margin: 2rem 0;
   background: #9ba9f0;
   border-radius: 10px;
   align-items: center;
