@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+import { TeamName } from './components/TeamName';
 
 export const Room = () => {
   return (
     <Container>
-      <h1>This is Room.</h1>
+      <TeamName name={'팀 이름'}></TeamName>
     </Container>
   );
 };
 
-const Container = styled.div`
-  background-color: green;
-`;
+const Container = styled.div``;
