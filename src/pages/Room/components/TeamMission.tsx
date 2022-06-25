@@ -13,5 +13,6 @@ export const TeamMission = ({ content }: TeamMissionProps) => {
 };
 
 const Container = styled.div`
-  background-color: skyblue;
+  margin-left: 2em;
+  color: #29396f;
 `;

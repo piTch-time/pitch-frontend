@@ -5,13 +5,15 @@ interface TeamNameProps {
 }
 
 export const TeamName = ({ name }: TeamNameProps) => {
-  return (
-    <Container>
-      <p>{name}</p>
-    </Container>
-  );
+  return <Container>{name}</Container>;
 };
 
 const Container = styled.div`
-  background-color: skyblue;
+  margin-left: 2rem;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 150%;
+  color: #161853;
+  background-color: #f5f5f5;
 `;

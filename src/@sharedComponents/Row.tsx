@@ -47,7 +47,7 @@ export const Row = ({
 const defaultStyle: CSSProperties = {};
 
 const Container = styled.div<RowProps>`
-  height: ${({ height }) => height}px;
+  height: ${({ height }) => height}rem;
   display: flex;
   flex-direction: row;
   justify-content: ${({ mainAxisAlignment }) => mainAxisAlignment};

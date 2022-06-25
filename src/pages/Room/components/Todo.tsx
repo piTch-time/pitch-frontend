@@ -115,7 +115,11 @@ export const Todo = () => {
     </Container>
   );
 };
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+`;
 
 const UserInput = styled.input``;
 

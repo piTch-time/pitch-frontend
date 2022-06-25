@@ -1,19 +1,20 @@
-import styled, { css } from 'styled-components';
+import styled, { css, CSSProperties } from 'styled-components';
 
 interface SpacingProps {
   width?: number;
   height?: number;
+  style?: CSSProperties;
 }
 
-export const Spacing = ({ width, height }: SpacingProps) => {
-  return <Container width={width} height={height}></Container>;
+export const Spacing = ({ width, height, style }: SpacingProps) => {
+  return <Container width={width} height={height} style={style}></Container>;
 };
 
 const Container = styled.div<SpacingProps>`
   ${({ width }) => {
     if (width) {
       return css`
-        width: ${width}px;
+        width: ${width}rem;
       `;
     } else {
       return css`
@@ -25,7 +26,7 @@ const Container = styled.div<SpacingProps>`
   ${({ height }) => {
     if (height) {
       return css`
-        height: ${height}px;
+        height: ${height}rem;
       `;
     } else {
       return css`
