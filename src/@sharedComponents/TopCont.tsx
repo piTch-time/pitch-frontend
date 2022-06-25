@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import svgImg from "../assets/images/TopCont.svg";
 
 interface CenterProps {
   children: any;
@@ -9,7 +10,8 @@ export const TopCont = ({ children }: CenterProps) => {
 };
 
 const Container = styled.div<CenterProps>`
-  background: #b7bee7;
+  background-image: url(${svgImg});
+  background-size: cover;
   border-radius: 0px 0px 15px 15px;
   height: 12rem;
   color: white;
