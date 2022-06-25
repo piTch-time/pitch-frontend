@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "pages/*": ["src/pages/*"],
-      "components/*": ["src/components/*"],
-      "styles/*": ["src/styles/*"]
+      "@sharedComponents/*": ["src/@sharedComponents/*"],
+      "@pages/*": ["src/pages/*"]
     }
   }
 }
