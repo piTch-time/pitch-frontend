@@ -1,8 +1,9 @@
 import styled, { CSSProperties } from "styled-components";
 
 type inputType = {
-  placeholder: string;
+  placeholder?: string;
   value?: string;
+  defaultValue?: string;
   name?: string;
   type?: string;
   width?: number;
@@ -12,6 +13,7 @@ type inputType = {
 export const Input = ({
   placeholder,
   value,
+  defaultValue,
   name,
   type,
   width,
@@ -21,6 +23,7 @@ export const Input = ({
     <InputComponent
       placeholder={placeholder}
       value={value}
+      defaultValue={defaultValue}
       name={name}
       type={type}
       width={width}
