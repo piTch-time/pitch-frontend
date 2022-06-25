@@ -6,17 +6,7 @@ const baseUrl = "https://pitch-backend-qytbbgth3q-du.a.run.app/v1"
 // rooms
 export const getRooms = () => {
   return axios
-    .get(baseUrl + "/rooms"
-      // ,
-      // {
-      // headers: {
-      //     'Access-Control-Allow-Origin': '*',
-      //   'credentials': 'omit'       
-      //   // 'Content-Type': 'application/json',
-      //   },
-      // withCredentials: true,
-      // }
-    )
+    .get(baseUrl + "/rooms/")
     .then((response) => {
       console.log(response.data);
       return response.data;
@@ -37,7 +27,7 @@ export const getRooms = () => {
 
 export const postRooms = (inputs: RoomInputs) => {
   return axios
-    .post(baseUrl + "/rooms", inputs)
+    .post(baseUrl + "/rooms/", inputs)
     .then((response) => {
       console.log(response.data);
       return response.data;
@@ -62,6 +52,28 @@ export const getRoomDetail = (id: string) => {
 export const getTasks = (id: string, created_by: string) => {
   return axios
     .get(baseUrl + "/rooms/" + id + "/tasks")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const postTasks = (id:string, inputs: {created_by: string, description: string}) => {
+  return axios
+    .post(baseUrl + "/rooms/" + id + "/tasks", inputs)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const patchTasks = (id:string, taskId: string, inputs: {isDone: boolean, description: string}) => {
+  return axios
+    .patch(baseUrl + "/rooms/" + id + "/tasks" + taskId, inputs)
     .then((response) => {
       return response.data;
     })
