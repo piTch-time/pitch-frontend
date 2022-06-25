@@ -11,7 +11,10 @@ export const RoomList = ({ list }: { list: any[] }) => {
             <Tag>🕖 {room.startEnd}</Tag>
           </FlexBet>
           <div>{room.goal}</div>
-          <Progress>진행상황 ({room.taskProgress}%)</Progress>
+          <Progress>
+            <div>진행상황</div>
+            <FontColor>({room.taskProgress}%)</FontColor>
+          </Progress>
           <ProgressBar done={room.taskProgress}></ProgressBar>
         </Container>
       );
@@ -41,16 +44,22 @@ const FlexBet = styled.div`
 `;
 
 const Tag = styled.div`
-  background: #b6bee6;
+  background: #ff8b8b;
   border-radius: 20px;
   color: white;
   padding: 0.4rem 0.6rem;
   margin-left: 0.4rem;
 `;
 
+const FontColor = styled.div`
+  color: #ff6a53;
+  margin-left: 0.4rem;
+`;
+
 const Progress = styled.div`
   font-weight: bold;
   font-size: 0.8rem;
+  display: flex;
   margin-top: 2.2rem;
   margin-bottom: 0.6rem;
 `;
@@ -58,7 +67,7 @@ const Progress = styled.div`
 const ProgressBar = styled.div`
   background: linear-gradient(
     90deg,
-    #b6bee6 ${({ done }: { done: number }) => done}%,
+    #ff5353 ${({ done }: { done: number }) => done}%,
     #f1f2f6 ${({ done }: { done: number }) => done}%
   );
   border-radius: 3rem;
