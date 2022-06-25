@@ -8,6 +8,7 @@ import { YoutubeContainer } from './components/YoutubeContainer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { TopCont } from '@sharedComponents/TopCont';
 
 export const Room = () => {
   return (
@@ -21,7 +22,6 @@ export const Room = () => {
         <Timer />
         <YoutubeContainer />
       </Slider>
-
       <Spacing height={3.2} />
       <ToGoalText>✅ 목표 달성까지 74% 남았어요!</ToGoalText>
 

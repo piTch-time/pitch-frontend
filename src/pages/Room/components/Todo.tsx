@@ -8,6 +8,7 @@ export const Todo = () => {
   const [users, setUsers] = useState<User[]>([]);
   const userInputRef = useRef<HTMLInputElement>(null);
   const taskInputRef = useRef<HTMLInputElement>(null);
+  const checkBoxRef = useRef<HTMLInputElement>(null);
 
   const createUser = () => {
     if (userInputRef && userInputRef.current) {
@@ -70,6 +71,41 @@ export const Todo = () => {
     setUsers(newUsers);
   };
 
+  const toggleDone = (task: task) => {
+    const taskOwner = users.filter((user: User) => {
+      let flag = false;
+      user.taskList.forEach((usertask: task) => {
+        if (usertask.id === task.id) {
+          flag = true;
+        }
+      });
+      return flag;
+    })[0];
+
+    const newTaskList = taskOwner.taskList.map((targetTask: task) => {
+      if (targetTask.id === task.id) {
+        return { ...targetTask, isDone: !targetTask.isDone };
+      } else {
+        return targetTask;
+      }
+    });
+
+    const newUser = {
+      ...taskOwner,
+      taskList: newTaskList,
+    };
+
+    const newUsers = users.map((targetUser: User) => {
+      if (targetUser.name === newUser.name) {
+        return newUser;
+      } else {
+        return targetUser;
+      }
+    });
+
+    setUsers(newUsers);
+  };
+
   return (
     <Container>
       {users.map((user: User, index: number) => {
@@ -81,8 +117,21 @@ export const Todo = () => {
               <div>
                 {user?.taskList?.map((task: task) => (
                   <div>
-                    <CheckBox type='checkbox'></CheckBox>
-                    <CheckBoxText>{task.description}</CheckBoxText>
+                    <CheckBox
+                      type='checkbox'
+                      ref={checkBoxRef}
+                      onClick={() => {
+                        toggleDone(task);
+                      }}
+                    ></CheckBox>
+                    {!task.isDone && (
+                      <CheckBoxText>{task.description}</CheckBoxText>
+                    )}
+                    {task.isDone && (
+                      <CheckBoxTextChecked>
+                        {task.description}
+                      </CheckBoxTextChecked>
+                    )}
                     <Spacing height={0.8}></Spacing>
                   </div>
                 ))}
@@ -153,6 +202,21 @@ const CheckBoxText = styled.span`
   line-height: 100%;
   position: relative;
   top: -0.5rem;
+  /* identical to box height, or 11px */
+
+  color: #29396e;
+`;
+
+const CheckBoxTextChecked = styled.span`
+  height: 1.6rem;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 100%;
+  position: relative;
+  top: -0.5rem;
+  text-decoration-line: line-through;
   /* identical to box height, or 11px */
 
   color: #29396e;
