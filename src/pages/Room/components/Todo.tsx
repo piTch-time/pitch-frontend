@@ -1,15 +1,16 @@
-import { Spacing } from '@sharedComponents/Spacing';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import { Spacing } from "@sharedComponents/Spacing";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import styled, { CSSProperties } from "styled-components";
 
 interface TodoProps {
   setTot: any;
   setDone: any;
+  timeOver: boolean;
 }
 
-export const Todo = ({ setTot, setDone }: TodoProps) => {
+export const Todo = ({ setTot, setDone, timeOver }: TodoProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const userInputRef = useRef<HTMLInputElement>(null);
   const taskInputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +29,7 @@ export const Todo = ({ setTot, setDone }: TodoProps) => {
           isInputActive: false,
         },
       ]);
-      userInputRef.current.value = '';
+      userInputRef.current.value = "";
     }
     console.log(users);
   };
@@ -145,7 +146,7 @@ export const Todo = ({ setTot, setDone }: TodoProps) => {
                 {user?.taskList?.map((task: task) => (
                   <div>
                     <CheckBox
-                      type='checkbox'
+                      type="checkbox"
                       ref={checkBoxRef}
                       onClick={() => {
                         toggleDone(task);
@@ -165,11 +166,11 @@ export const Todo = ({ setTot, setDone }: TodoProps) => {
 
                 {user.isInputActive && (
                   <>
-                    <CheckBox type='checkbox'></CheckBox>
+                    <CheckBox type="checkbox"></CheckBox>
                     <NewToDoInput
                       ref={taskInputRef}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
+                        if (e.key === "Enter") {
                           createTask(user.name);
                         }
                       }}
@@ -178,39 +179,43 @@ export const Todo = ({ setTot, setDone }: TodoProps) => {
                 )}
               </div>
               <Spacing height={1.5} />
-              <AddGoalButton
-                onClick={() => {
-                  activateInput(user.name);
-                }}
-              >
-                목표 추가
-              </AddGoalButton>
+              {!timeOver && (
+                <AddGoalButton
+                  onClick={() => {
+                    activateInput(user.name);
+                  }}
+                >
+                  목표 추가
+                </AddGoalButton>
+              )}
               <Spacing height={1}></Spacing>
-              <Spacing height={3} style={BackgroundColor}></Spacing>
+              <Spacing height={1} style={BackgroundColor}></Spacing>
             </UserContainer>
-            <Spacing height={2.1} style={BackgroundColor}></Spacing>
+            <Spacing height={1} style={BackgroundColor}></Spacing>
           </>
         );
       })}
 
-      <UserInputContainer>
-        <UserInput
-          ref={userInputRef}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+      {!timeOver && (
+        <UserInputContainer>
+          <UserInput
+            ref={userInputRef}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                createUser();
+              }
+            }}
+            placeholder="닉네임을 입력하세요."
+          ></UserInput>
+          <UserInputButton
+            onClick={() => {
               createUser();
-            }
-          }}
-          placeholder='닉네임을 입력하세요.'
-        ></UserInput>
-        <UserInputButton
-          onClick={() => {
-            createUser();
-          }}
-        >
-          <UserInputButtonText>팀원 추가</UserInputButtonText>
-        </UserInputButton>
-      </UserInputContainer>
+            }}
+          >
+            <UserInputButtonText>팀원 추가</UserInputButtonText>
+          </UserInputButton>
+        </UserInputContainer>
+      )}
     </Container>
   );
 };
@@ -221,7 +226,7 @@ const ButtonImg = styled.img`
 `;
 
 const BackgroundColor: CSSProperties = {
-  backgroundColor: '#f8f8f8',
+  backgroundColor: "#f8f8f8",
 };
 const CheckBox = styled.input`
   margin-left: 2.7rem;
@@ -234,7 +239,7 @@ const CheckBox = styled.input`
 
 const CheckBoxText = styled.span`
   height: 1.6rem;
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 1.1rem;
@@ -248,7 +253,7 @@ const CheckBoxText = styled.span`
 
 const CheckBoxTextChecked = styled.span`
   height: 1.6rem;
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 1.1rem;
@@ -306,7 +311,7 @@ interface User {
 
 interface task {
   id: string;
-  created_by: User['name'];
+  created_by: User["name"];
   description: string;
   isDone: boolean;
 }

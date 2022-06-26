@@ -1,8 +1,8 @@
-import { Spacing } from '@sharedComponents/Spacing';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
-import clock from '@assets/images/clock.png';
+import { Spacing } from "@sharedComponents/Spacing";
+import { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import clock from "@assets/images/clock.png";
 
 interface TimerProps {
   setTimeOver: any;
@@ -13,10 +13,16 @@ export const Timer = ({ setTimeOver }: TimerProps) => {
   // "2020-10-10T14:58:04+09:00"
 
   const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(10);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
+  const [leftTime, setLeftTime] = useState(
+    hours * 3600 + minutes * 60 + seconds
+  );
 
   useEffect(() => {
+    if (leftTime === 0) {
+      setTimeOver(true);
+    }
     const playTimer = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
@@ -25,7 +31,6 @@ export const Timer = ({ setTimeOver }: TimerProps) => {
         if (minutes === 0) {
           if (hours === 0) {
             clearInterval(playTimer);
-            setTimeOver(true);
           } else {
             setHours(hours - 1);
             setMinutes(59);
@@ -35,6 +40,7 @@ export const Timer = ({ setTimeOver }: TimerProps) => {
           setSeconds(59);
         }
       }
+      setLeftTime(leftTime - 1);
     }, 1000);
     return () => clearInterval(playTimer);
   }, [minutes, seconds]);
@@ -45,8 +51,8 @@ export const Timer = ({ setTimeOver }: TimerProps) => {
         <Clock src={clock}></Clock>
         <Spacing height={0.8}></Spacing>
         <Time>
-          {String(hours).padStart(2, '0')}:{String(minutes).padStart(2, '0')}:
-          {String(seconds).padStart(2, '0')}
+          {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
+          {String(seconds).padStart(2, "0")}
         </Time>
       </TimerArea>
     </Container>

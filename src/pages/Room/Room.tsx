@@ -1,29 +1,45 @@
-import { Spacing } from '@sharedComponents/Spacing';
-import styled, { CSSProperties, StyledProps } from 'styled-components';
-import { TeamMission } from './components/TeamMission';
-import { TeamName } from './components/TeamName';
-import { Timer } from './components/Timer';
-import { Todo } from './components/Todo';
-import { YoutubeContainer } from './components/YoutubeContainer';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { TopCont } from '@sharedComponents/TopCont';
-import { useState } from 'react';
-import { TopBackground } from '@sharedComponents/TopBackground';
+import { Spacing } from "@sharedComponents/Spacing";
+import styled, { CSSProperties, StyledProps } from "styled-components";
+import { TeamMission } from "./components/TeamMission";
+import { TeamName } from "./components/TeamName";
+import { Timer } from "./components/Timer";
+import { Todo } from "./components/Todo";
+import { YoutubeContainer } from "./components/YoutubeContainer";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { TopCont } from "@sharedComponents/TopCont";
+import { useState } from "react";
+import { TopBackground } from "@sharedComponents/TopBackground";
+import { Button } from "@sharedComponents/Button";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Room = () => {
   const [tot, setTot] = useState(0);
   const [done, setDone] = useState(0);
   const [timeOver, setTimeOver] = useState<boolean>(false);
 
+  // const [list, setList] = useState()
+  // const [task, setTask] = useState()
+  // const getData = async () => {
+  //   const lists = await getRoomDetail(id);
+  //   const tasks = await getTasks();
+  //   setList(lists.rooms);
+  //   setTask(tasks);
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
   return (
     <Container>
       {timeOver && <TopBackground timeOver={timeOver} tot={tot} done={done} />}
       <Spacing height={5.6} />
-      <TeamName name={'팀 이름'} />
+      <TeamName name={"우리팀짱"} />
       <Spacing height={0.8} />
-      <TeamMission content={'팀 목표'} />
+      <TeamMission content={"해커톤을 열심히 하자"} />
       <Spacing height={2.4} />
       <Slider {...settings}>
         <Timer setTimeOver={setTimeOver} />
@@ -31,7 +47,7 @@ export const Room = () => {
       </Slider>
       <Spacing height={3.2} />
       <ToGoalText>
-        ✅ 목표 달성까지{' '}
+        ✅ 목표 달성까지{" "}
         {isNaN(100 - Math.floor((done / tot) * 100))
           ? 100
           : 100 - Math.floor((done / tot) * 100)}
@@ -47,7 +63,14 @@ export const Room = () => {
       <Spacing height={5.3} />
       <PersonalGoalText>📌 개인 목표</PersonalGoalText>
       <Spacing height={3} />
-      <Todo setTot={setTot} setDone={setDone}></Todo>
+      <Todo setTot={setTot} setDone={setDone} timeOver={timeOver}></Todo>
+      {timeOver && (
+        <Link to="/">
+          <Button>
+            <ButtonText>나가기</ButtonText>
+          </Button>
+        </Link>
+      )}
     </Container>
   );
 };
@@ -117,3 +140,5 @@ const Center = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+const ButtonText = styled.div``;
