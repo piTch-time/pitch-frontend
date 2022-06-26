@@ -8,34 +8,54 @@ import { YoutubeContainer } from './components/YoutubeContainer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { TopCont } from '@sharedComponents/TopCont';
+import { useState } from 'react';
+import { TopBackground } from '@sharedComponents/TopBackground';
 
 export const Room = () => {
+  const [tot, setTot] = useState(0);
+  const [done, setDone] = useState(0);
+  const [timeOver, setTimeOver] = useState<boolean>(false);
+
   return (
     <Container>
+      {timeOver && <TopBackground timeOver={timeOver} tot={tot} done={done} />}
       <Spacing height={5.6} />
       <TeamName name={'팀 이름'} />
       <Spacing height={0.8} />
       <TeamMission content={'팀 목표'} />
       <Spacing height={2.4} />
       <Slider {...settings}>
-        <Timer />
+        <Timer setTimeOver={setTimeOver} />
         <YoutubeContainer />
       </Slider>
-
       <Spacing height={3.2} />
-      <ToGoalText>✅ 목표 달성까지 74% 남았어요!</ToGoalText>
+      <ToGoalText>
+        ✅ 목표 달성까지{' '}
+        {isNaN(100 - Math.floor((done / tot) * 100))
+          ? 100
+          : 100 - Math.floor((done / tot) * 100)}
+        % 남았어요!
+      </ToGoalText>
 
       <Spacing height={2.4} />
       <Center>
-        <ProgressBar></ProgressBar>
+        <ProgressBarContainer>
+          <ProgressBar tot={tot} done={done} />
+        </ProgressBarContainer>
       </Center>
       <Spacing height={5.3} />
       <PersonalGoalText>📌 개인 목표</PersonalGoalText>
       <Spacing height={3} />
-      <Todo></Todo>
+      <Todo setTot={setTot} setDone={setDone}></Todo>
     </Container>
   );
 };
+
+interface ProgressBarProps {
+  tot: number;
+  done: number;
+}
 
 const settings = {
   dots: true,
@@ -49,12 +69,7 @@ const settings = {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #f5f5f5;
 `;
-
-const BackgroundColor: CSSProperties = {
-  backgroundColor: '#f5f5f5',
-};
 
 const ToGoalText = styled.p`
   margin-left: 3em;
@@ -63,14 +78,28 @@ const ToGoalText = styled.p`
   font-size: 1.4em;
   line-height: 100%;
   /* identical to box height, or 14px */
-  background-color: #f5f5f5;
+
   color: #29396e;
 `;
 
-const ProgressBar = styled.div`
+const ProgressBarContainer = styled.div`
   width: 32rem;
   height: 1.2rem;
-  background-color: #b6bee6;
+  background: #f1f1f1;
+  border-radius: 3rem;
+`;
+
+const ProgressBar = styled.div<ProgressBarProps>`
+  width: ${({ tot, done }) => {
+    if (tot === 0 && done == 0) {
+      return 0;
+    }
+    return (done / tot) * 32;
+  }}rem;
+  height: 1.2rem;
+  background: linear-gradient(270deg, #ff5353 0%, #ff4f79 100%);
+  border-radius: 3rem;
+  transition: all 0.5s;
 `;
 
 const PersonalGoalText = styled.div`
@@ -79,7 +108,7 @@ const PersonalGoalText = styled.div`
   font-size: 1.4rem;
   line-height: 100%;
   /* identical to box height, or 14px */
-  background-color: #f5f5f5;
+
   color: #29396e;
 `;
 

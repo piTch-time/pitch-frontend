@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RoomList = ({ list }: { list: any[] }) => {
   const renderedList =
@@ -64,7 +64,7 @@ const Progress = styled.div`
   margin-bottom: 0.6rem;
 `;
 
-const ProgressBar = styled.div`
+export const ProgressBar = styled.div`
   background: linear-gradient(
     90deg,
     #ff5353 ${({ done }: { done: number }) => done}%,
