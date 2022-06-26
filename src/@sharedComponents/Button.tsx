@@ -23,12 +23,20 @@ const BottomButton = styled.button`
   border: none;
   background: #9ba9f0;
   border-radius: 10px;
+  border: 2px solid #81afd9;
+  background: #fcfcfc;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
   font-weight: bold;
 
   &:hover {
-    background-color: skyblue;
+    background: linear-gradient(
+      58.62deg,
+      rgba(129, 175, 217, 0.8) 10.6%,
+      rgba(101, 135, 255, 0.8) 95.93%
+    );
   }
 `;

@@ -1,4 +1,5 @@
 import { Button } from "@sharedComponents/Button";
+import { Link } from "react-router-dom";
 import { Input } from "@sharedComponents/Input";
 import { Spacing } from "@sharedComponents/Spacing";
 import styled from "styled-components";
@@ -97,7 +98,9 @@ export const CreateRoomInput = () => {
         placeholder="비밀번호를 입력해주세요."
       ></Input>
       <Spacing height={4}></Spacing>
-      <Button type="submit">방 만들기</Button>
+      <Link to="/room">
+        <Button type="submit">방 만들기</Button>
+      </Link>
       <Spacing height={1}></Spacing>
     </Form>
   );
