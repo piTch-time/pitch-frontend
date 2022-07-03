@@ -7,11 +7,22 @@ GDG Summer Hackathon 2022(22.06.25 14:00 ~ 22.06.26 10:00)의 결과물입니다
 ![image-20220630061716299](https://raw.githubusercontent.com/BonJunKu/image_server/upload/img/202206300617330.png)
 
 다같이 노동요를 들으면서 함께 업무에 집중하는 생산성 향상 도움 서비스입니다.  
-제한된 pitch time에 공동 목표를 달성하기 위해 각자의 목표와 진행 상황을 공유합니다.
+제한된 pitch time에 공동 목표를 달성하기 위해 각자의 목표와 진행 상황을 공유합니다.  
+### 타겟
+- 공동 목표를 달성하기 원하는 팀
+- 졸린 점심 시간 등에 바짝 집중해서 업무를 끝내고 싶은 사람
+- 나의 노동요를 다른 사람과 함께 들으며 일하고 싶은 사람
+<br />
 
 ## 배포 링크
 
-[Link](https://pitch-frontend.vercel.app/)  <br /><br />
+[Link](https://pitch-frontend.vercel.app/)  
+
+## Technology Stack
+
+TypeScript, React, Styled Component 
+
+<br /><br />
 
 
 ## 데모
